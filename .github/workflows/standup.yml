@@ -1,0 +1,25 @@
+name: Post standup order
+
+on:
+  schedule:
+    # 08:17 UTC or BST, Mon-Fri
+    # Random time so scheduled jobs are not silently
+    # dropped when load is high
+    - cron: '17 8 * * 1-5'
+      timezone: 'Europe/London'
+  workflow_dispatch:
+      
+
+jobs:
+  post-order:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download latest binary
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download latest --repo ${{ github.repository }} -p 'slack-standup-order-bot' -O bot
+      - run: chmod +x bot
+      - run: ./bot
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

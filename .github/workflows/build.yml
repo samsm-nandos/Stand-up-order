@@ -1,0 +1,27 @@
+name: Build binary
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release
+      - name: Publish to latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --yes --cleanup-tag || true
+          git tag -f latest
+          git push origin latest --force
+          gh release create latest target/release/slack-standup-order-bot \
+            --title "Latest build" \
+            --notes "Built from ${{ github.sha }}"
