@@ -2,10 +2,11 @@ name: Post standup order
 
 on:
   schedule:
-    # TEMPORARY: 09:28 Europe/London, Mon-Fri, for diagnosing why
-    # the schedule trigger has never fired. Revert to a normal
-    # morning time once confirmed working.
-    - cron: '28 9 * * 1-5'
+    # Runs at 06:28 Europe/London, Mon-Fri
+    # GitHub's cron doesn't fire reliably, so intentionally
+    # choose an earlier time to allow job to catch up and
+    # run before 10 am
+    - cron: '28 6 * * 1-5'
       timezone: 'Europe/London'
   workflow_dispatch:
       
