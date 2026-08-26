@@ -2,10 +2,10 @@ name: Post standup order
 
 on:
   schedule:
-    # TEMPORARY: 09:35 Europe/London, Mon-Fri, for diagnosing why
+    # TEMPORARY: 09:28 Europe/London, Mon-Fri, for diagnosing why
     # the schedule trigger has never fired. Revert to a normal
     # morning time once confirmed working.
-    - cron: '35 9 * * 1-5'
+    - cron: '28 9 * * 1-5'
       timezone: 'Europe/London'
   workflow_dispatch:
       
