@@ -6,14 +6,14 @@ on:
     # GitHub's cron doesn't fire reliably, so intentionally
     # choose an earlier time to allow job to catch up and
     # run before 10 am
-    - cron: '28 6 * * 1-5'
+    - cron: '30 9 * * 1-5'
       timezone: 'Europe/London'
   workflow_dispatch:
       
 
 jobs:
   post-order:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Download latest binary
         env:
