@@ -6,7 +6,7 @@ on:
     # GitHub's cron doesn't fire reliably, so intentionally
     # choose an earlier time to allow job to catch up and
     # run before 10 am
-    - cron: '30 9 * * 1-5'
+    - cron: '27 9 * * 1-4'
       timezone: 'Europe/London'
   workflow_dispatch:
       
